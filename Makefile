@@ -29,7 +29,7 @@ OK =		$(C_OK)OK$(C_NO)
 all:	$(NAME)
 
 $(NAME):	$(LIB) $(OBJS)
-		$(CC) $(SRCS) libft/libft.a minilibx_macos/libmlx.a -o fdf $(FLAGS) $(OPENGL)
+		$(CC) $(SRCS) libft/libft.a  -o fdf $(FLAGS) $(OPENGL)
 		@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)
 $(LIB):
 	@make -C $(LIB_DOS)

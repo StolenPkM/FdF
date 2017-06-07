@@ -6,13 +6,13 @@
 /*   By: fsidler <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 15:05:30 by fsidler           #+#    #+#             */
-/*   Updated: 2017/06/03 04:56:52 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/07 21:27:25 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int			ft_expose_hook(t_mlx *env)
+int				ft_expose_hook(t_mlx *env)
 {
 	int	x;
 	int	y;
@@ -35,14 +35,7 @@ int			ft_expose_hook(t_mlx *env)
 	return (0);
 }
 
-/*static int	ft_key4(int keycode, t_mlx *env)
-{
-	if (keycode == 15)
-	{
-
-	}
-}*/
-static int	ft_key3(int keycode, t_mlx *env)
+static int		ft_key3(int keycode, t_mlx *env)
 {
 	if (keycode == 13)
 	{
@@ -61,7 +54,7 @@ static int	ft_key3(int keycode, t_mlx *env)
 	return (0);
 }
 
-static int	ft_key2(int keycode, t_mlx *env)
+static int		ft_key2(int keycode, t_mlx *env)
 {
 	if (keycode == 126)
 	{
@@ -87,7 +80,7 @@ static int	ft_key2(int keycode, t_mlx *env)
 	return (0);
 }
 
-int			ft_key_hook(int keycode, t_mlx *env)
+int				ft_key_hook(int keycode, t_mlx *env)
 {
 	if (keycode == 53)
 		exit(0);

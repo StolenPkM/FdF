@@ -6,7 +6,7 @@
 /*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 14:54:07 by pabonnin          #+#    #+#             */
-/*   Updated: 2017/06/07 14:38:09 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/07 21:32:46 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@
 # include "../minilibx_macos/mlx.h"
 # include "../libft/includes/libft.h"
 
-# define	COLOR1  0x00FF0000
-# define	COLOR2  0x0000FF00
+# define COLOR1	0x00FF0000
+# define COLOR2	0x0000FF00
 
-typedef struct s_mlx
+typedef struct	s_mlx
 {
 	void		*mlx;
 	void		*win;
+	int			i;
+	int			j;
 	int			nbl;
 	int			nbi;
+	int			check;
 	int			**tab;
 	int			zoom;
 	int			xmove;
@@ -43,12 +46,12 @@ typedef struct s_mlx
 	double		y1;
 }				t_mlx;
 
-int		count_lines(int fd);
-int		**tab_init(char *arg, int fd, t_mlx *env);
-int		ft_draw(t_mlx *env);
-int		map_init(char *arg, int fd);
-int		ft_expose_hook(t_mlx *env);
-int		ft_key_hook(int keycode, t_mlx *env);
-void	fdf_error(int i);
-void	fdf_check(t_mlx *env);
+int				count_lines(int fd);
+int				**tab_init(char *arg, int fd, t_mlx *env);
+int				ft_draw(t_mlx *env);
+int				map_init(char *arg, int fd);
+int				ft_expose_hook(t_mlx *env);
+int				ft_key_hook(int keycode, t_mlx *env);
+void			fdf_error(int i);
+void			fdf_check(char *line);
 #endif
