@@ -11,13 +11,13 @@ SRC =	main.c\
 	map_init.c\
 	parse.c\
 	fdf_error.c\
-	expose.c
+	key.c
 SRCS =	$(addprefix $(SRC_PATH)/, $(SRC))
 OBJS =	main.o\
 	map_init.o\
 	parse.o\
 	fdf_error.o\
-	expose.o
+	key.o
 C_NO =		"\033[00"
 C_OK =		"\033[32m"
 C_GOOD	=	"\033[32m"
@@ -29,7 +29,7 @@ OK =		$(C_OK)OK$(C_NO)
 all:	$(NAME)
 
 $(NAME):	$(LIB) $(OBJS)
-		$(CC) $(FLAGS) $(SRCS) libft/libft.a -o fdf $(OPENGL)
+		$(CC) $(SRCS) libft/libft.a minilibx_macos/libmlx.a -o fdf $(FLAGS) $(OPENGL)
 		@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)
 $(LIB):
 	@make -C $(LIB_DOS)
@@ -38,7 +38,7 @@ $(OBJS):
 clean:
 	rm -f $(OBJS)
 	rm -f ./libft/*.o
-	rm -rf src/fillit.h.gch
+	rm -rf src/fillit.h
 	@echo "Cleaning" [ $(NAME) ] "..." $(OK)
 fclean:	clean
 	rm -f $(NAME)

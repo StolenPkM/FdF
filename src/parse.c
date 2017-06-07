@@ -6,13 +6,14 @@
 /*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 13:36:12 by pabonnin          #+#    #+#             */
-/*   Updated: 2017/05/15 12:23:32 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/07 14:32:07 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 int			count_num_line(char **str);
+
 int		count_lines(int fd)
 {
 	int		i;
@@ -37,7 +38,6 @@ int		**tab_init(char *arg, int fd, t_mlx *mlx)
 	char	**tmp;
 
 	i = 0;
-	j = 0;
 	line = NULL;
 	close(fd);
 	fd = open(arg, O_RDONLY);
@@ -47,9 +47,10 @@ int		**tab_init(char *arg, int fd, t_mlx *mlx)
 		return (NULL);
 	while (get_next_line(fd, &line) > 0)
 	{
+		j = 0;
 		tmp = ft_strsplit(line, ' ');
 		mlx->nbi = count_num_line(tmp);
-		tab[i] = (int *)malloc(sizeof(int) * mlx->nbi);
+		tab[i] = (int *)malloc(sizeof(int) * mlx->nbi);	
 		while (j < mlx->nbi)
 		{
 			tab[i][j] = ft_atoi(tmp[j]);

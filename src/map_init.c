@@ -6,11 +6,12 @@
 /*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 11:19:03 by pabonnin          #+#    #+#             */
-/*   Updated: 2017/05/15 12:30:15 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/07 14:31:31 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static void	ft_draw_line(t_mlx *env)
 {
@@ -25,7 +26,7 @@ static void	ft_draw_line(t_mlx *env)
 	{
 		env->x = env->x0 + (dx * arret);
 		env->y = env->y0 + (dy * arret);
-		mlx_pixel_put(env->mlx, env->win, env->x + env->xmove,\
+		mlx_pixel_put(env->mlx, env->win, env->x + env->xmove, 
 				env->y + env->ymove, 0x00FFFFFF);
 		arret += 1. / ft_sqrt((dx * dx) + (dy * dy));
 	}
@@ -77,25 +78,25 @@ int			ft_draw(t_mlx *env)
 	return (0);
 }
 
-
 int		map_init(char *arg, int fd)
 {
 	t_mlx 	env;
 
 	fd = open(arg, O_RDONLY);
-	env.z = 2.0;
+	env.z = 1.5;
 	env.xmove = 0;
 	env.ymove = 0;
 	env.nbl = count_lines(fd);
 	env.tab = tab_init(arg, fd, &env);
+	fdf_check(&env);
 	env.mlx = mlx_init();
-	env.win = mlx_new_window(env.mlx, 1024, 800, "FDF");
+	env.win = mlx_new_window(env.mlx, 800, 800, "FDF");
 	if (env.nbl >= env.nbi)
-	  env.zoom = 400 / env.nbl;
-	  else
-	  env.zoom = 500 / env.nbi;
-	mlx_expose_hook(env.win, &ft_expose, &env);
-	//mlx_key_hook(env.win, &ft_key, &env);
+		env.zoom = 400 / env.nbl;
+	else
+		env.zoom = 400 / env.nbi;
+	mlx_expose_hook(env.win, &ft_expose_hook, &env);
+	mlx_key_hook(env.win, &ft_key_hook, &env);
 	mlx_loop(env.mlx);
 	return (0);
 }

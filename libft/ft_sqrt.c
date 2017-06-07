@@ -6,27 +6,18 @@
 /*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 11:38:16 by pabonnin          #+#    #+#             */
-/*   Updated: 2017/05/15 11:38:56 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/03 04:27:49 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-int	ft_sqrt(int nb)
+float		ft_sqrt(float nb)
 {
-	int i;
-	int sq;
+	float	x;
 
-	i = 1;
-	sq = 1;
-	if(nb == 0)
-		return(0);
-	while (i * i < nb)
-	{
-		i++;
-	}
-	if ((nb % i) == 0)
-		return (i);
-	else
-		return(0);
+	x = 0;
+	while (x * x < nb)
+		x++;
+	return (x);
 }
