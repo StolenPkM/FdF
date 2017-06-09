@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybenoit <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 18:06:12 by ybenoit           #+#    #+#             */
-/*   Updated: 2016/11/09 18:34:29 by ybenoit          ###   ########.fr       */
+/*   Created: 2016/11/10 17:54:31 by pabonnin          #+#    #+#             */
+/*   Updated: 2017/02/13 20:05:42 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		ret[j++] = s2[i++];
 	ret[j] = '\0';
+	free((void*)s1);
 	return (ret);
 }

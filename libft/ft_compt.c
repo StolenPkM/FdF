@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strpbrk.c                                       :+:      :+:    :+:   */
+/*   ft_compt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybenoit <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/12 20:10:27 by ybenoit           #+#    #+#             */
-/*   Updated: 2016/11/12 20:18:06 by ybenoit          ###   ########.fr       */
+/*   Created: 2016/11/14 14:43:57 by pabonnin          #+#    #+#             */
+/*   Updated: 2016/11/14 18:40:34 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strpbrk(const char *str, const char *c)
+int		ft_compt(int n)
 {
-	size_t i;
-	size_t len;
+	int	compt;
 
-	i = 0;
-	len = ft_strlen(c);
-	while (*str)
+	compt = 0;
+	if (n < 0)
+		n = -n;
+	else if (n == 0)
+		return (1);
+	while (n > 10)
 	{
-		while (i < len)
-		{
-			if (c[i] == *str)
-				return ((char*)str);
-			i++;
-		}
-		str++;
+		n = n / 10;
+		compt++;
 	}
-	return (NULL);
+	return (compt);
 }

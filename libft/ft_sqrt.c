@@ -6,11 +6,11 @@
 /*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 11:38:16 by pabonnin          #+#    #+#             */
-/*   Updated: 2017/06/03 04:27:49 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/09 11:33:00 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "libft.h"
 
 float		ft_sqrt(float nb)
 {

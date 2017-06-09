@@ -6,7 +6,7 @@
 /*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 14:54:07 by pabonnin          #+#    #+#             */
-/*   Updated: 2017/06/07 21:32:46 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/09 16:33:50 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
-# include "../minilibx_macos/mlx.h"
-# include "../libft/includes/libft.h"
+# include <mlx.h>
+# include "../libft/libft.h"
 
 # define COLOR1	0x00FF0000
 # define COLOR2	0x0000FF00
+# define HEIGHT 800
+# define WIDTH 800
 
 typedef struct	s_mlx
 {

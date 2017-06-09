@@ -18,12 +18,12 @@ OBJS =	main.o\
 	parse.o\
 	fdf_error.o\
 	key.o
-C_NO =		"\033[00"
+C_NO =		"\033[00m"
 C_OK =		"\033[32m"
 C_GOOD	=	"\033[32m"
 C_ERROR =	"\033[31m"
 C_WARN =	"\033[31m"
-SUCCESS =	$(C_GOOD)SUCCESS$(C_NO)
+SUCCESS =	$(C_OK)SUCCESS$(C_NO)
 OK =		$(C_OK)OK$(C_NO)
 
 all:	$(NAME)
@@ -34,12 +34,12 @@ $(NAME):	$(LIB) $(OBJS)
 $(LIB):
 	@make -C $(LIB_DOS)
 $(OBJS):
-	$(CCO) $(FLAGS) $(SRCS) $(INC)
+	$(CCO) $(FLAGS) $(SRCS)
 clean:
 	rm -f $(OBJS)
 	rm -f ./libft/*.o
-	rm -rf src/fillit.h
 	@echo "Cleaning" [ $(NAME) ] "..." $(OK)
+
 fclean:	clean
 	rm -f $(NAME)
 	rm -f libft/libft.a

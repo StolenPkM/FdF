@@ -3,40 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybenoit <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 13:33:37 by ybenoit           #+#    #+#             */
-/*   Updated: 2016/11/11 22:40:03 by ybenoit          ###   ########.fr       */
+/*   Created: 2016/11/10 23:00:58 by pabonnin          #+#    #+#             */
+/*   Updated: 2016/11/14 23:50:53 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_itoa(int nb)
+static size_t	get_str_len(int n)
 {
-	char			*ret;
-	int				i;
-	int				pw;
-	unsigned int	n;
+	size_t		i;
 
-	i = 0;
-	n = (nb < 0) ? (-nb) : nb;
-	pw = ft_num_count(n) - 1;
-	ret = (char *)malloc(sizeof(char) * (ft_num_count(n) + (nb < 0 ? 2 : 1)));
-	if (ret == NULL)
-		return (NULL);
-	if (nb < 0)
-	{
-		ret[0] = '-';
+	i = 1;
+	while (n /= 10)
 		i++;
-	}
-	while (pw > -1)
+	return (i);
+}
+
+char			*ft_itoa(int n)
+{
+	char			*str;
+	size_t			str_len;
+	unsigned int	n_cpy;
+
+	str_len = get_str_len(n);
+	n_cpy = n;
+	if (n < 0)
 	{
-		ret[i++] = (pw == 0) ? n + '0' : (n / ft_pow10(pw)) + '0';
-		n = (pw == 1 && nb < 0) ? n - ((n / ft_pow10(pw)) * ft_pow10(pw))
-		: n - ((n / ft_pow10(pw)) * ft_pow10(pw));
-		pw--;
+		n_cpy = -n;
+		str_len++;
 	}
-	ret[i] = '\0';
-	return (ret);
+	if (!(str = ft_strnew(str_len)))
+		return (NULL);
+	str[--str_len] = n_cpy % 10 + '0';
+	while (n_cpy /= 10)
+		str[--str_len] = n_cpy % 10 + '0';
+	if (n < 0)
+		*(str + 0) = '-';
+	return (str);
 }

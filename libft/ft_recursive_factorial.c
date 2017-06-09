@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen_c.c                                      :+:      :+:    :+:   */
+/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybenoit <ybenoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 19:14:48 by ybenoit           #+#    #+#             */
-/*   Updated: 2016/12/05 19:14:52 by ybenoit          ###   ########.fr       */
+/*   Created: 2016/11/03 13:57:57 by pabonnin          #+#    #+#             */
+/*   Updated: 2016/11/23 16:02:04 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlen_c(char *str, char c)
+int		ft_recursive_factorial(int nb)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
+	if (nb < 0 || nb > 12)
+		return (0);
+	else if (nb == 0 || nb == 1)
+		return (1);
+	else
+		nb = nb * ft_recursive_factorial(nb - 1);
+	return (nb);
 }

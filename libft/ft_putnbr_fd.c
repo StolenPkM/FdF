@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybenoit <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 18:11:56 by ybenoit           #+#    #+#             */
-/*   Updated: 2016/11/11 22:43:10 by ybenoit          ###   ########.fr       */
+/*   Created: 2016/11/16 18:37:49 by pabonnin          #+#    #+#             */
+/*   Updated: 2016/11/17 01:14:14 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int nb, int fd)
+static	void	ft_putnbr_rec(int n, int fd)
 {
-	int				i;
-	int				pw;
-	unsigned int	n;
+	if ((n / 10) > 0)
+		ft_putnbr_rec(n / 10, fd);
+	ft_putchar_fd((n % 10) + '0', fd);
+}
 
-	i = 0;
-	n = (nb < 0) ? (-nb) : nb;
-	pw = ft_num_count(n) - 1;
-	if (nb < 0)
-		ft_putchar_fd('-', fd);
-	while (pw > -1)
+void			ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
 	{
-		ft_putchar_fd(((pw == 0) ? n + '0' : (n / ft_pow10(pw)) + '0'), fd);
-		i++;
-		n = (pw == 1 && nb < 0) ? n - ((n / ft_pow10(pw)) * ft_pow10(pw))
-		: n - ((n / ft_pow10(pw)) * ft_pow10(pw));
-		pw--;
+		ft_putstr_fd("-2147483648", fd);
+		return ;
 	}
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = -n;
+	}
+	ft_putnbr_rec(n, fd);
 }

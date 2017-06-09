@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybenoit <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 21:06:50 by ybenoit           #+#    #+#             */
-/*   Updated: 2016/11/11 21:36:50 by ybenoit          ###   ########.fr       */
+/*   Created: 2016/11/21 17:36:50 by pabonnin          #+#    #+#             */
+/*   Updated: 2016/11/21 17:41:51 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	char		*dest_cpy;
-	const char	*src_cpy;
+	char		*destcpy;
+	const char	*srccpy;
 	size_t		i;
-	size_t		dlen;
+	size_t		len;
 
 	i = size;
-	dest_cpy = dest;
-	src_cpy = src;
-	while (i-- && *dest_cpy)
-		dest_cpy++;
-	dlen = dest_cpy - dest;
-	i = size - dlen;
+	destcpy = dest;
+	srccpy = src;
+	while (i-- && *destcpy)
+		destcpy++;
+	len = destcpy - dest;
+	i = size - len;
 	if (i == 0)
-		return (dlen + ft_strlen((char*)src_cpy));
-	while (*src_cpy)
+		return (len + ft_strlen((char*)srccpy));
+	while (*srccpy)
 	{
 		if (i != 1)
 		{
-			*dest_cpy++ = *src_cpy;
+			*destcpy++ = *srccpy;
 			--i;
 		}
-		src_cpy++;
+		srccpy++;
 	}
-	*dest_cpy = '\0';
-	return (dlen + (src_cpy - src));
+	*destcpy = '\0';
+	return (len + (srccpy - src));
 }

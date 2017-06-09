@@ -6,7 +6,7 @@
 /*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 17:50:45 by pabonnin          #+#    #+#             */
-/*   Updated: 2017/06/07 21:16:33 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/09 16:19:16 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		fdf_error(int i)
 	if (i == 6)
 		ft_putstr_fd("error: caracter must be a digit or space\n", 2);
 	if (i == 7)
-		ft_putstr_fd("error: bad file or file too big\n", 2);
+		ft_putstr_fd("error : File is empty\n", 2);
 	exit(1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 11:19:03 by pabonnin          #+#    #+#             */
-/*   Updated: 2017/06/07 21:29:46 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/09 16:41:23 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,22 @@ static void		ft_draw_line(t_mlx *env)
 
 static void		ft_verti(t_mlx *env, int j, int i)
 {
-	env->x0 = 50 + (i * env->zoom) + (j * env->zoom);
-	env->x1 = 50 + (i * env->zoom) + ((j + 1) * env->zoom);
-	env->y0 = ((700 + (j * env->zoom)) * 1. / 2.) - (((i * env->zoom)
+	env->x0 = (WIDTH / 6) + (i * env->zoom) + (j * env->zoom);
+	env->x1 = (WIDTH / 6) + (i * env->zoom) + ((j + 1) * env->zoom);
+	env->y0 = (((HEIGHT) + (j * env->zoom)) * 1. / 2.) - (((i * env->zoom)
 				+ (env->z * env->tab[j][i])) * 1. / 2.);
-	env->y1 = ((700 + ((j + 1) * env->zoom)) * 1. / 2.) - (((i * env->zoom)
+	env->y1 = (((HEIGHT) + ((j + 1) * env->zoom)) * 1. / 2.) - (((i * env->zoom)
 				+ (env->z * env->tab[j + 1][i])) * 1. / 2.);
 	ft_draw_line(env);
 }
 
 static void		ft_hori(t_mlx *env, int j, int i)
 {
-	env->x0 = 50 + (i * env->zoom) + (j * env->zoom);
-	env->x1 = 50 + ((i + 1) * env->zoom) + (j * env->zoom);
-	env->y0 = ((700 + (j * env->zoom)) * 1. / 2.) - (((i * env->zoom)
+	env->x0 = (WIDTH / 6) + (i * env->zoom) + (j * env->zoom);
+	env->x1 = (WIDTH / 6) + ((i + 1) * env->zoom) + (j * env->zoom);
+	env->y0 = (((HEIGHT) + (j * env->zoom)) * 1. / 2.) - (((i * env->zoom)
 				+ (env->z * env->tab[j][i])) * 1. / 2.);
-	env->y1 = ((700 + (j * env->zoom)) * 1. / 2.) - ((((i + 1) * env->zoom)
+	env->y1 = (((HEIGHT) + (j * env->zoom)) * 1. / 2.) - ((((i + 1) * env->zoom)
 				+ (env->z * env->tab[j][i + 1])) * 1. / 2.);
 	ft_draw_line(env);
 }
@@ -83,7 +83,7 @@ int				map_init(char *arg, int fd)
 	t_mlx	env;
 
 	fd = open(arg, O_RDONLY);
-	env.z = 1.5;
+	env.z = 1.2;
 	env.xmove = 0;
 	env.ymove = 0;
 	env.i = 0;
@@ -92,7 +92,7 @@ int				map_init(char *arg, int fd)
 	env.nbl = count_lines(fd);
 	env.tab = tab_init(arg, fd, &env);
 	env.mlx = mlx_init();
-	env.win = mlx_new_window(env.mlx, 800, 800, "FDF");
+	env.win = mlx_new_window(env.mlx, HEIGHT, WIDTH, "FDF");
 	if (env.nbl >= env.nbi)
 		env.zoom = 400 / env.nbl;
 	else

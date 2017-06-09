@@ -1,73 +1,84 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybenoit <ybenoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 19:08:16 by ybenoit           #+#    #+#             */
-/*   Updated: 2016/12/09 18:13:56 by ybenoit          ###   ########.fr       */
+/*   Created: 2017/01/31 19:04:24 by pabonnin          #+#    #+#             */
+/*   Updated: 2017/06/09 11:40:22 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_gnl		*gnl_findorcreate_file(const int fd, t_list **my_list)
+int		ft_strlen_c(char *str, char c)
 {
-	t_list		*file;
-	t_gnl		file_data;
+	int	i;
 
-	file = *my_list;
-	while (file)
-	{
-		if (((t_gnl *)(file->content))->fd == fd)
-			return (file->content);
-		file = file->next;
-	}
-	file_data.fd = fd;
-	file_data.buff = ft_strnew(BUFF_SIZE);
-	if (file_data.buff == NULL)
-		return (NULL);
-	file = ft_lstnew(&file_data, sizeof(file_data));
-	if (file == NULL)
-		return (NULL);
-	ft_lstadd(my_list, file);
-	return ((*my_list)->content);
+	i = 0;
+	while (str[i] != c && str[i])
+		i++;
+	if (!str[i])
+		return (i);
+	else
+		return (i + 1);
 }
 
-ssize_t		gnl_readoneline(t_gnl *file)
+char	*ft_strdup_c(char *src, char *dest, char c)
 {
-	char		read_buffer[BUFF_SIZE + 1];
-	ssize_t		size_read;
+	int	i;
 
-	size_read = 1;
-	while (size_read > 0 && ft_strstr(file->buff, "\n") == NULL)
+	i = 0;
+	dest = (char *)malloc(sizeof(char) * (ft_strlen_c(src, c) + 1));
+	if (!dest)
+		return (0);
+	while (src[i] != c && src[i])
 	{
-		size_read = read(file->fd, &read_buffer, BUFF_SIZE);
-		if (size_read == -1)
-			return (-1);
-		read_buffer[size_read] = '\0';
-		file->buff = ft_strjoin_free(file->buff, read_buffer);
-		ft_memset(read_buffer, '\0', size_read);
+		dest[i] = src[i];
+		i++;
 	}
-	return (size_read);
+	dest[i] = '\0';
+	return (dest);
 }
 
-int			get_next_line(const int fd, char **line)
+int		read_one_line(int const fd, char **b_tmp)
 {
-	static t_list	*my_list;
-	t_gnl			*file;
-	ssize_t			buff_read;
-	char			*temp;
+	int				byte_r;
+	char			buff[BUFF_SIZE + 1];
 
-	if (fd < 0 || !line)
+	byte_r = 1;
+	while (byte_r > 0 && !ft_strstr(*b_tmp, "\n"))
+	{
+		byte_r = read(fd, &buff, BUFF_SIZE);
+		if (byte_r == -1)
+			return (byte_r);
+		buff[byte_r] = '\0';
+		*b_tmp = ft_strjoin(*b_tmp, buff);
+		ft_memset(buff, '\0', byte_r);
+	}
+	return (byte_r);
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	ssize_t			b_read;
+	static char		*b_tmp;
+	char			*ftmp;
+
+	if (!b_tmp)
+	{
+		b_tmp = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
+		if (!b_tmp)
+			return (0);
+	}
+	if (!line)
 		return (-1);
-	file = gnl_findorcreate_file(fd, &my_list);
-	if ((buff_read = gnl_readoneline(file)) == -1)
+	if ((b_read = read_one_line(fd, &b_tmp)) == -1)
 		return (-1);
-	*line = ft_strdup_c(file->buff, '\n');
-	temp = file->buff;
-	file->buff = ft_strdup(file->buff + ft_strlen_c(file->buff, '\n') + 1);
-	free(temp);
-	return (**line || buff_read > 0 ? 1 : 0);
+	line[0] = ft_strdup_c(b_tmp, line[0], '\n');
+	ftmp = b_tmp;
+	b_tmp = ft_strdup(b_tmp + ft_strlen_c(b_tmp, '\n'));
+	free(ftmp);
+	return (**line || b_read > 0 ? 1 : 0);
 }

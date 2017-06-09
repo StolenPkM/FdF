@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pow.c                                           :+:      :+:    :+:   */
+/*   ft_p10.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybenoit <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/12 21:03:42 by ybenoit           #+#    #+#             */
-/*   Updated: 2016/11/12 21:28:38 by ybenoit          ###   ########.fr       */
+/*   Created: 2016/11/14 12:58:53 by pabonnin          #+#    #+#             */
+/*   Updated: 2016/11/14 17:10:38 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double	ft_pow(double n, double p)
+int		ft_p10(int n)
 {
-	double	n_cp;
+	int		result;
 
-	n_cp = n;
-	if (p > 0)
-	{
-		while (p-- > 1)
-			n_cp *= n;
-	}
-	else if (p < 0)
-		n_cp = 1 / (ft_pow(n_cp, -p));
-	else
+	result = 1;
+	if (n == 0)
 		return (1);
-	return (n_cp);
+	while (n--)
+		result *= 10;
+	return (result);
 }

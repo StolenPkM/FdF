@@ -6,7 +6,7 @@
 /*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 13:36:12 by pabonnin          #+#    #+#             */
-/*   Updated: 2017/06/07 21:32:30 by pabonnin         ###   ########.fr       */
+/*   Updated: 2017/06/09 16:31:17 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int			count_num_line(char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i > 500)
-		fdf_error(7);
 	return (i);
 }
 
@@ -31,6 +29,8 @@ int			count_lines(int fd)
 	char	buf[2];
 
 	i = 0;
+	if ((r_byte = read(fd, buf, 1)) == 0)
+		fdf_error(7);
 	while ((r_byte = read(fd, buf, 1)) > 0)
 	{
 		if ((buf[0] < '0' || buf[0] > '9') &&
@@ -44,7 +44,7 @@ int			count_lines(int fd)
 	return (i);
 }
 
-int			**tab_init(char *arg, int fd, t_mlx *mlx)
+int			**tab_init(char *arg, int fd, t_mlx *env)
 {
 	int		**tab;
 	char	*line;
@@ -52,23 +52,23 @@ int			**tab_init(char *arg, int fd, t_mlx *mlx)
 
 	line = NULL;
 	fd = open(arg, O_RDONLY);
-	tab = (int **)malloc(sizeof(int *) * mlx->nbl);
+	tab = (int **)malloc(sizeof(int *) * env->nbl);
 	while (get_next_line(fd, &line) > 0)
 	{
-		mlx->j = 0;
+		env->j = 0;
 		tmp = ft_strsplit(line, ' ');
 		fdf_check(line);
-		mlx->nbi = count_num_line(tmp);
-		if (mlx->check != 0 && mlx->check != mlx->nbi)
+		env->nbi = count_num_line(tmp);
+		if (env->check != 0 && env->check != env->nbi)
 			fdf_error(5);
-		mlx->check = mlx->nbi;
-		tab[mlx->i] = (int *)malloc(sizeof(int) * mlx->nbi);
-		while (mlx->j < mlx->nbi)
+		env->check = env->nbi;
+		tab[env->i] = (int *)malloc(sizeof(int) * env->nbi);
+		while (env->j < env->nbi)
 		{
-			tab[mlx->i][mlx->j] = ft_atoi(tmp[mlx->j]);
-			mlx->j++;
+			tab[env->i][env->j] = ft_atoi(tmp[env->j]);
+			env->j++;
 		}
-		mlx->i++;
+		env->i++;
 	}
 	return (tab);
 }

@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup_c.c                                      :+:      :+:    :+:   */
+/*   ft_isblanks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybenoit <ybenoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pabonnin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 19:14:10 by ybenoit           #+#    #+#             */
-/*   Updated: 2016/12/05 19:14:30 by ybenoit          ###   ########.fr       */
+/*   Created: 2016/11/17 16:49:25 by pabonnin          #+#    #+#             */
+/*   Updated: 2016/11/17 17:07:45 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup_c(char *str, char c)
+int		ft_isblanks(int c)
 {
-	char *ret;
-
-	ret = ft_strndup(str, ft_strlen_c(str, c));
-	return (ret);
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\r' ||
+				c == '\v' || c == '\f');
 }
